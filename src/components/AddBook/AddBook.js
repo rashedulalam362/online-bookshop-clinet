@@ -1,19 +1,24 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+
 // import Button from 'react-bootstrap/Button';
 
 const AddBook = () => {
+  const[books, setBooks]=useState([])
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [imageURL,setImageURL]=useState(null)
   
   const onSubmit = data => {
     const eventData={
     name:data.name,
-   imageURL:imageURL
+   imageURL:imageURL,
+   price:data.price,
+   writer:data.writer
+   
 
     };
-    const url=`http://localhost:5055/addBook`;
+    const url=`https://gentle-headland-32263.herokuapp.com/addBook`;
   
     fetch(url,{
       method:'POST',
@@ -46,7 +51,7 @@ const AddBook = () => {
 
   }
   // const deleteBook=id=>{
-  
+  //   console.log(id);
 
   // }
   return (
@@ -60,9 +65,12 @@ const AddBook = () => {
       
       
       <input type="submit" /><br/>
-      {/* <Button variant="warning" onClick={()=>deleteBook(book._id)} >Delete Button</Button>{' '} */}
+      {/* <button onClick={()=>deleteBook(books._id)} >deleteBtn</button> */}
     </form>
+   
   );
+
+  
 };
 
 export default AddBook;

@@ -35,9 +35,9 @@ function App() {
           <PrivateRoute path="/book/:bookId">
             <CheckOrder />
           </PrivateRoute>
-          <MangeOrder path="/manageOrder">
+          <PrivateRoute path="/manageOrder">
             <MangeOrder />
-          </MangeOrder>
+          </PrivateRoute>
           <Route exact path="/">
             <Home />
           </Route>

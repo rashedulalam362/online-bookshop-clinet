@@ -3,11 +3,13 @@ import { Button, Card } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 
 const BookDetail = (props) => {
+ console.log(props);
+  const {_id,price,writer, imageURL} = props.book;
 
-  const {bookId,price,writer, imageURL} = props.book;
   const history = useHistory()
-  const handleBook = (bookId) => {
-      history.push(`/book/${bookId}`);
+  const handleBook = (_id) => {
+ ;
+      history.push(`/book/${_id}`);
   }
     return (
         <Card style={{ width: '18rem' }}>
@@ -18,7 +20,7 @@ const BookDetail = (props) => {
             {writer}
             {price}
           </Card.Text>
-          <Button onClick={() => handleBook(bookId)} variant="primary">buy now</Button>
+          <Button onClick={() => handleBook(_id)} variant="primary">buy now</Button>
         </Card.Body>
       </Card>
     );
