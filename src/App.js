@@ -1,24 +1,49 @@
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Header from './components/Header/Header';
+import { createContext, useState } from 'react';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import CheckOrder from './components/CheckOrder/CheckOrder';
+import AddBook from './components/AddBook/AddBook';
+import MangeOrder from './components/MangeOrder/MangeOrder';
 
+export const UserContext = createContext();
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <p>Name: {loggedInUser.name}</p>
+    <Router>
+        <Header/>
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/addBook">
+            <AddBook />
+          </Route>
+          <PrivateRoute path="/book/:bookId">
+            <CheckOrder />
+          </PrivateRoute>
+          <MangeOrder path="/manageOrder">
+            <MangeOrder />
+          </MangeOrder>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+    </Router>
+  </UserContext.Provider>
   );
 }
 
